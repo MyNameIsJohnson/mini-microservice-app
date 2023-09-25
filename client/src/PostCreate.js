@@ -4,22 +4,25 @@ import axios from "axios";
 const PostCreate = () => {
   const [title, setTitle] = useState("");
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (event) => {
+    event.preventDefault();
+
     await axios.post("http://localhost:4000/posts", {
       title,
     });
+
     setTitle("");
+    window.location.reload(true);
   };
+
   return (
     <div>
       <form onSubmit={onSubmit}>
         <div className="form-group">
-          <label>Title</label>
+          <label htmlFor="post">Title</label>
           <input
+            id="post"
             type="text"
-            name=""
-            id=""
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             className="form-control"
@@ -30,4 +33,5 @@ const PostCreate = () => {
     </div>
   );
 };
+
 export default PostCreate;
